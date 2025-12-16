@@ -1,29 +1,53 @@
 /// Shared library for Kids AI educational apps
-///
-/// Dieses Package enthält:
-/// - Theme (Farben, Typography, Spacing, Shadows, Gradients)
-/// - Widgets (KidButton, KidCard, KidAvatar)
-///
-/// Usage:
-/// ```dart
-/// import 'package:kids_ai_shared/kids_ai_shared.dart';
-///
-/// // Theme verwenden
-/// MaterialApp(
-///   theme: KidsTheme.light,
-/// );
-///
-/// // Widgets verwenden
-/// KidButton(label: 'Start', onPressed: () {});
-/// KidCard(child: Text('Hello'));
-/// KidAvatar(name: 'Max', age: 5);
-/// ```
 library kids_ai_shared;
 
-// Theme exports
-export 'src/theme/theme.dart';
+// ============================================================
+// AUDIO SERVICES - Text-to-Speech (Ausgabe)
+// ============================================================
+export 'src/audio/pre_recorded_audio_service.dart';
+export 'src/audio/fluent_tts_service.dart';
+export 'src/audio/tts_provider.dart';
+export 'src/audio/tts_cache_manager.dart';
+export 'src/audio/tts_config.dart';
 
-// Widget exports
+// ============================================================
+// AUDIO SERVICES - Speech-to-Text (Eingabe)
+// ============================================================
+export 'src/audio/recording_config.dart';
+export 'src/audio/recording_service.dart';
+export 'src/audio/stt_provider.dart';
+
+// ============================================================
+// THEME
+// ============================================================
+export 'src/theme/colors.dart';
+export 'src/theme/typography.dart';
+export 'src/theme/spacing.dart';
+export 'src/theme/gradients.dart';
+
+// ============================================================
+// AUDIO SERVICES - Sound Effects
+// ============================================================
+export 'src/audio/sound_effects_service.dart';
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+export 'src/notifications/push_notification_service.dart';
+
+// ============================================================
+// WIDGETS
+// ============================================================
 export 'src/widgets/kid_button.dart';
 export 'src/widgets/kid_card.dart';
 export 'src/widgets/kid_avatar.dart';
+
+// ============================================================
+// OFFLINE SYNC
+// ============================================================
+export 'src/sync/offline_sync_service.dart';
+
+// ============================================================
+// ERROR HANDLING
+// ============================================================
+export 'src/error/error_handling_service.dart';

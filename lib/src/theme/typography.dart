@@ -1,157 +1,199 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'colors.dart';
 
-/// Kids AI App Typography
-/// Einheitliche Schriften für alle Apps
+/// Kids AI Typografie
+/// Gut lesbare, kindgerechte Schriften
 class KidsTypography {
   KidsTypography._();
 
-  // Font Family
-  static String get fontFamily => GoogleFonts.nunito().fontFamily!;
+  // ============================================================
+  // FONT FAMILIES
+  // ============================================================
 
-  // Display Styles (große Überschriften)
-  static TextStyle get displayLarge => GoogleFonts.nunito(
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        color: KidsColors.textPrimary,
-        height: 1.2,
-      );
+  /// Primäre Schrift (System-Font, gut lesbar)
+  static const String fontFamily = 'Nunito';
 
-  static TextStyle get displayMedium => GoogleFonts.nunito(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-        color: KidsColors.textPrimary,
-        height: 1.2,
-      );
+  /// Alternative: System-Font falls Nunito nicht verfügbar
+  static const String fontFamilyFallback = '.SF Pro Rounded';
 
-  static TextStyle get displaySmall => GoogleFonts.nunito(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-        color: KidsColors.textPrimary,
-        height: 1.3,
-      );
+  // ============================================================
+  // DISPLAY STYLES (für große Überschriften)
+  // ============================================================
 
-  // Headline Styles (Abschnittsüberschriften)
-  static TextStyle get headlineLarge => GoogleFonts.nunito(
-        fontSize: 24,
-        fontWeight: FontWeight.w700,
-        color: KidsColors.textPrimary,
-        height: 1.3,
-      );
+  static const TextStyle displayLarge = TextStyle(
+    fontSize: 40,
+    fontWeight: FontWeight.bold,
+    letterSpacing: -0.5,
+    height: 1.2,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get headlineMedium => GoogleFonts.nunito(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-        color: KidsColors.textPrimary,
-        height: 1.3,
-      );
+  static const TextStyle displayMedium = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    letterSpacing: -0.25,
+    height: 1.25,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get headlineSmall => GoogleFonts.nunito(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: KidsColors.textPrimary,
-        height: 1.4,
-      );
+  static const TextStyle displaySmall = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0,
+    height: 1.3,
+    color: KidsColors.textPrimary,
+  );
 
-  // Title Styles (Card-Titel etc.)
-  static TextStyle get titleLarge => GoogleFonts.nunito(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: KidsColors.textPrimary,
-        height: 1.4,
-      );
+  // ============================================================
+  // HEADLINE STYLES (für Abschnitte)
+  // ============================================================
 
-  static TextStyle get titleMedium => GoogleFonts.nunito(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: KidsColors.textPrimary,
-        height: 1.4,
-      );
+  static const TextStyle headlineLarge = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0,
+    height: 1.35,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get titleSmall => GoogleFonts.nunito(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        color: KidsColors.textPrimary,
-        height: 1.4,
-      );
+  static const TextStyle headlineMedium = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0,
+    height: 1.4,
+    color: KidsColors.textPrimary,
+  );
 
-  // Body Styles (Fließtext)
-  static TextStyle get bodyLarge => GoogleFonts.nunito(
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        color: KidsColors.textPrimary,
-        height: 1.5,
-      );
+  static const TextStyle headlineSmall = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0,
+    height: 1.4,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get bodyMedium => GoogleFonts.nunito(
-        fontSize: 14,
-        fontWeight: FontWeight.normal,
-        color: KidsColors.textSecondary,
-        height: 1.5,
-      );
+  // ============================================================
+  // TITLE STYLES (für Cards, Listen)
+  // ============================================================
 
-  static TextStyle get bodySmall => GoogleFonts.nunito(
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        color: KidsColors.textSecondary,
-        height: 1.5,
-      );
+  static const TextStyle titleLarge = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0,
+    height: 1.4,
+    color: KidsColors.textPrimary,
+  );
 
-  // Label Styles (Buttons, Chips etc.)
-  static TextStyle get labelLarge => GoogleFonts.nunito(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        color: KidsColors.textPrimary,
-        height: 1.4,
-      );
+  static const TextStyle titleMedium = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.1,
+    height: 1.45,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get labelMedium => GoogleFonts.nunito(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        color: KidsColors.textPrimary,
-        height: 1.4,
-      );
+  static const TextStyle titleSmall = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.1,
+    height: 1.45,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get labelSmall => GoogleFonts.nunito(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-        color: KidsColors.textSecondary,
-        height: 1.4,
-      );
+  // ============================================================
+  // BODY STYLES (für Fließtext)
+  // ============================================================
 
-  // Special Styles für Kinder-Apps
-  static TextStyle get gameTitle => GoogleFonts.nunito(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-        color: KidsColors.textPrimary,
-        letterSpacing: 1.2,
-      );
+  static const TextStyle bodyLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.15,
+    height: 1.5,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get score => GoogleFonts.nunito(
-        fontSize: 48,
-        fontWeight: FontWeight.bold,
-        color: KidsColors.primary,
-      );
+  static const TextStyle bodyMedium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.15,
+    height: 1.5,
+    color: KidsColors.textPrimary,
+  );
 
-  static TextStyle get emoji => const TextStyle(
-        fontSize: 64,
-        height: 1.0,
-      );
+  static const TextStyle bodySmall = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.2,
+    height: 1.5,
+    color: KidsColors.textSecondary,
+  );
 
-  /// Skaliert Schriftgröße basierend auf Alter
-  static TextStyle scaleForAge(TextStyle style, int age) {
-    double multiplier = 1.0;
-    if (age <= 5) multiplier = 1.3;
-    else if (age <= 8) multiplier = 1.15;
+  // ============================================================
+  // LABEL STYLES (für Buttons, Chips)
+  // ============================================================
 
-    return style.copyWith(
-      fontSize: (style.fontSize ?? 14) * multiplier,
-    );
-  }
+  static const TextStyle labelLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+    height: 1.4,
+    color: KidsColors.textPrimary,
+  );
 
-  /// Erstellt TextTheme für ThemeData
-  static TextTheme get textTheme => TextTheme(
+  static const TextStyle labelMedium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+    height: 1.4,
+    color: KidsColors.textPrimary,
+  );
+
+  static const TextStyle labelSmall = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.5,
+    height: 1.4,
+    color: KidsColors.textSecondary,
+  );
+
+  // ============================================================
+  // SPECIAL STYLES
+  // ============================================================
+
+  /// Für Spielpunkte, große Zahlen
+  static const TextStyle score = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.w800,
+    letterSpacing: -1,
+    height: 1.1,
+    color: KidsColors.primary,
+  );
+
+  /// Für Timer, Countdown
+  static const TextStyle timer = TextStyle(
+    fontSize: 36,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 2,
+    height: 1.2,
+    fontFeatures: [FontFeature.tabularFigures()],
+    color: KidsColors.textPrimary,
+  );
+
+  /// Für Untertitel (Lianko App)
+  static const TextStyle subtitle = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    height: 1.6,
+    color: KidsColors.textPrimary,
+    backgroundColor: Color(0xCC000000), // Halbtransparent
+  );
+
+  // ============================================================
+  // TEXT THEME (für ThemeData)
+  // ============================================================
+
+  static TextTheme get textTheme => const TextTheme(
         displayLarge: displayLarge,
         displayMedium: displayMedium,
         displaySmall: displaySmall,
