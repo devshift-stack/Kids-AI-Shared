@@ -1,0 +1,17 @@
+name: kids_ai_shared
+description: Shared code for Kids AI educational apps
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.4.9
+  equatable: ^2.0.5
+  dio: ^5.4.0
+
+flutter:
+  uses-material-design: true
