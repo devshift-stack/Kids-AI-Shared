@@ -41,3 +41,13 @@ export 'src/notifications/push_notification_service.dart';
 export 'src/widgets/kid_button.dart';
 export 'src/widgets/kid_card.dart';
 export 'src/widgets/kid_avatar.dart';
+
+// ============================================================
+// OFFLINE SYNC
+// ============================================================
+export 'src/sync/offline_sync_service.dart';
+
+// ============================================================
+// ERROR HANDLING
+// ============================================================
+export 'src/error/error_handling_service.dart';
