@@ -22,20 +22,38 @@ abstract class TtsProvider {
 
 /// Edge TTS Provider (Kostenlos, unbegrenzt)
 /// Nutzt die gleichen Stimmen wie Azure über den Edge-Browser-Endpoint
+/// Keine API-Keys erforderlich!
 class EdgeTtsProvider extends TtsProvider {
-  // HTTP Endpoint (WebSocket wäre für Streaming-Anwendungen)
-  static const String _httpEndpoint =
-      'https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1';
+  // Aktueller Edge TTS Endpoint (Stand 2025)
+  // Alternative Endpoints falls einer nicht funktioniert
+  static const List<String> _endpoints = [
+    'https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1',
+    'https://eastus.api.speech.microsoft.com/cognitiveservices/v1',
+  ];
+
+  int _currentEndpointIndex = 0;
 
   @override
-  String get name => 'Edge TTS';
+  String get name => 'Edge TTS (Free)';
 
   @override
   Future<bool> isAvailable() async {
     try {
-      // Einfacher Health-Check
-      return true; // Edge ist fast immer verfügbar
+      // Teste ob der Endpoint erreichbar ist
+      final response = await _dio.head(
+        _endpoints[_currentEndpointIndex],
+        options: Options(
+          validateStatus: (status) => status != null && status < 500,
+          receiveTimeout: const Duration(seconds: 5),
+        ),
+      );
+      return response.statusCode != null && response.statusCode! < 500;
     } catch (e) {
+      // Versuche nächsten Endpoint
+      if (_currentEndpointIndex < _endpoints.length - 1) {
+        _currentEndpointIndex++;
+        return isAvailable();
+      }
       return false;
     }
   }
@@ -51,24 +69,42 @@ class EdgeTtsProvider extends TtsProvider {
 
       // Edge TTS über HTTP POST
       final response = await _dio.post(
-        _httpEndpoint,
+        _endpoints[_currentEndpointIndex],
         data: ssml,
         options: Options(
           headers: {
             'Content-Type': 'application/ssml+xml',
             'X-Microsoft-OutputFormat': TtsConfig.audioFormat,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/91.0.864.59',
+            'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0',
+            'Accept': '*/*',
+            'Accept-Language': 'de-DE,de;q=0.9,en;q=0.8',
+            'Origin': 'https://azure.microsoft.com',
+            'Referer': 'https://azure.microsoft.com/',
           },
           responseType: ResponseType.bytes,
+          receiveTimeout: const Duration(seconds: 30),
         ),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && response.data != null) {
         return Uint8List.fromList(response.data);
       }
+
+      // Bei Fehler nächsten Endpoint versuchen
+      if (_currentEndpointIndex < _endpoints.length - 1) {
+        _currentEndpointIndex++;
+        return synthesize(text, language);
+      }
+
       return null;
     } catch (e) {
       print('Edge TTS Error: $e');
+      // Bei Fehler nächsten Endpoint versuchen
+      if (_currentEndpointIndex < _endpoints.length - 1) {
+        _currentEndpointIndex++;
+        return synthesize(text, language);
+      }
       return null;
     }
   }
