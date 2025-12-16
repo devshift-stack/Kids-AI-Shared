@@ -109,46 +109,46 @@ class SoundEffectsService {
     // Success
     SoundEffect.correct: SoundConfig(
       effect: SoundEffect.correct,
-      path: 'sounds/success/correct.mp3',
+      path: 'assets/sounds/success/correct.mp3',
       category: SoundCategory.success,
     ),
     SoundEffect.levelUp: SoundConfig(
       effect: SoundEffect.levelUp,
-      path: 'sounds/success/level_up.mp3',
+      path: 'assets/sounds/success/level_up.mp3',
       category: SoundCategory.success,
     ),
     SoundEffect.achievement: SoundConfig(
       effect: SoundEffect.achievement,
-      path: 'sounds/success/achievement.mp3',
+      path: 'assets/sounds/success/achievement.mp3',
       category: SoundCategory.success,
     ),
     SoundEffect.starCollect: SoundConfig(
       effect: SoundEffect.starCollect,
-      path: 'sounds/success/star.mp3',
+      path: 'assets/sounds/success/star.mp3',
       category: SoundCategory.success,
     ),
     SoundEffect.applause: SoundConfig(
       effect: SoundEffect.applause,
-      path: 'sounds/success/applause.mp3',
+      path: 'assets/sounds/success/applause.mp3',
       category: SoundCategory.success,
     ),
 
     // Error
     SoundEffect.wrong: SoundConfig(
       effect: SoundEffect.wrong,
-      path: 'sounds/error/wrong.mp3',
+      path: 'assets/sounds/error/wrong.mp3',
       category: SoundCategory.error,
       volume: 0.7,
     ),
     SoundEffect.tryAgain: SoundConfig(
       effect: SoundEffect.tryAgain,
-      path: 'sounds/error/try_again.mp3',
+      path: 'assets/sounds/error/try_again.mp3',
       category: SoundCategory.error,
       volume: 0.7,
     ),
     SoundEffect.oops: SoundConfig(
       effect: SoundEffect.oops,
-      path: 'sounds/error/oops.mp3',
+      path: 'assets/sounds/error/oops.mp3',
       category: SoundCategory.error,
       volume: 0.6,
     ),
@@ -156,31 +156,31 @@ class SoundEffectsService {
     // UI
     SoundEffect.buttonTap: SoundConfig(
       effect: SoundEffect.buttonTap,
-      path: 'sounds/ui/tap.mp3',
+      path: 'assets/sounds/ui/tap.mp3',
       category: SoundCategory.ui,
       volume: 0.5,
     ),
     SoundEffect.buttonHover: SoundConfig(
       effect: SoundEffect.buttonHover,
-      path: 'sounds/ui/hover.mp3',
+      path: 'assets/sounds/ui/hover.mp3',
       category: SoundCategory.ui,
       volume: 0.3,
     ),
     SoundEffect.swipe: SoundConfig(
       effect: SoundEffect.swipe,
-      path: 'sounds/ui/swipe.mp3',
+      path: 'assets/sounds/ui/swipe.mp3',
       category: SoundCategory.ui,
       volume: 0.4,
     ),
     SoundEffect.pop: SoundConfig(
       effect: SoundEffect.pop,
-      path: 'sounds/ui/pop.mp3',
+      path: 'assets/sounds/ui/pop.mp3',
       category: SoundCategory.ui,
       volume: 0.5,
     ),
     SoundEffect.whoosh: SoundConfig(
       effect: SoundEffect.whoosh,
-      path: 'sounds/ui/whoosh.mp3',
+      path: 'assets/sounds/ui/whoosh.mp3',
       category: SoundCategory.ui,
       volume: 0.4,
     ),
@@ -188,50 +188,50 @@ class SoundEffectsService {
     // Game
     SoundEffect.countdown: SoundConfig(
       effect: SoundEffect.countdown,
-      path: 'sounds/game/countdown.mp3',
+      path: 'assets/sounds/game/countdown.mp3',
       category: SoundCategory.game,
     ),
     SoundEffect.timerTick: SoundConfig(
       effect: SoundEffect.timerTick,
-      path: 'sounds/game/tick.mp3',
+      path: 'assets/sounds/game/tick.mp3',
       category: SoundCategory.game,
       volume: 0.3,
     ),
     SoundEffect.gameStart: SoundConfig(
       effect: SoundEffect.gameStart,
-      path: 'sounds/game/start.mp3',
+      path: 'assets/sounds/game/start.mp3',
       category: SoundCategory.game,
     ),
     SoundEffect.gameOver: SoundConfig(
       effect: SoundEffect.gameOver,
-      path: 'sounds/game/game_over.mp3',
+      path: 'assets/sounds/game/game_over.mp3',
       category: SoundCategory.game,
     ),
     SoundEffect.bonus: SoundConfig(
       effect: SoundEffect.bonus,
-      path: 'sounds/game/bonus.mp3',
+      path: 'assets/sounds/game/bonus.mp3',
       category: SoundCategory.game,
     ),
 
     // Reward
     SoundEffect.coinCollect: SoundConfig(
       effect: SoundEffect.coinCollect,
-      path: 'sounds/reward/coin.mp3',
+      path: 'assets/sounds/reward/coin.mp3',
       category: SoundCategory.reward,
     ),
     SoundEffect.chestOpen: SoundConfig(
       effect: SoundEffect.chestOpen,
-      path: 'sounds/reward/chest.mp3',
+      path: 'assets/sounds/reward/chest.mp3',
       category: SoundCategory.reward,
     ),
     SoundEffect.fanfare: SoundConfig(
       effect: SoundEffect.fanfare,
-      path: 'sounds/reward/fanfare.mp3',
+      path: 'assets/sounds/reward/fanfare.mp3',
       category: SoundCategory.reward,
     ),
     SoundEffect.sparkle: SoundConfig(
       effect: SoundEffect.sparkle,
-      path: 'sounds/reward/sparkle.mp3',
+      path: 'assets/sounds/reward/sparkle.mp3',
       category: SoundCategory.reward,
       volume: 0.6,
     ),
@@ -239,20 +239,20 @@ class SoundEffectsService {
     // Ambient
     SoundEffect.bubbles: SoundConfig(
       effect: SoundEffect.bubbles,
-      path: 'sounds/ambient/bubbles.mp3',
+      path: 'assets/sounds/ambient/bubbles.mp3',
       category: SoundCategory.ambient,
       volume: 0.3,
       loop: true,
     ),
     SoundEffect.magic: SoundConfig(
       effect: SoundEffect.magic,
-      path: 'sounds/ambient/magic.mp3',
+      path: 'assets/sounds/ambient/magic.mp3',
       category: SoundCategory.ambient,
       volume: 0.4,
     ),
     SoundEffect.nature: SoundConfig(
       effect: SoundEffect.nature,
-      path: 'sounds/ambient/nature.mp3',
+      path: 'assets/sounds/ambient/nature.mp3',
       category: SoundCategory.ambient,
       volume: 0.3,
       loop: true,

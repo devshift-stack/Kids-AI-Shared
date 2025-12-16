@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest_all.dart' as tz_data;
 
 /// Push-Benachrichtigungen für Kids AI Apps
 /// Unterstützt Firebase Cloud Messaging und lokale Benachrichtigungen
@@ -120,6 +122,15 @@ class PushNotificationService {
     if (_isInitialized) return true;
 
     try {
+      // Firebase Core initialisieren (falls noch nicht geschehen)
+      if (Firebase.apps.isEmpty) {
+        await Firebase.initializeApp();
+      }
+
+      // Timezone initialisieren (für geplante Benachrichtigungen)
+      tz_data.initializeTimeZones();
+      tz.setLocalLocation(tz.getLocation('Europe/Berlin'));
+
       // Berechtigungen anfordern
       final settings = await _messaging.requestPermission(
         alert: true,

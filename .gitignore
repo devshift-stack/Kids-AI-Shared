@@ -6,3 +6,4 @@ pubspec.lock
 *.freezed.dart
 .DS_Store
 .idea/
+.flutter-plugins-dependencies
