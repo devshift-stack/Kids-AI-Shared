@@ -1,7 +1,9 @@
 /// Shared library for Kids AI educational apps
 library kids_ai_shared;
 
-// Export shared components here
-// export 'src/widgets/common_button.dart';
-// export 'src/services/api_service.dart';
-// export 'src/models/user.dart';
+// Audio Services
+export 'src/audio/pre_recorded_audio_service.dart';
+export 'src/audio/fluent_tts_service.dart';
+export 'src/audio/tts_provider.dart';
+export 'src/audio/tts_cache_manager.dart';
+export 'src/audio/tts_config.dart';

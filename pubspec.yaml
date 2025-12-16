@@ -12,6 +12,17 @@ dependencies:
   flutter_riverpod: ^2.4.9
   equatable: ^2.0.5
   dio: ^5.4.0
+  just_audio: ^0.9.36
+  path_provider: ^2.1.2
+  crypto: ^3.0.3
+  flutter_tts: ^4.0.2
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/audio/bs/
+    - assets/audio/de/
+    - assets/audio/en/
+    - assets/audio/hr/
+    - assets/audio/sr/
+    - assets/audio/tr/
