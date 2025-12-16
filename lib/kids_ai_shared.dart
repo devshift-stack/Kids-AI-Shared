@@ -26,6 +26,16 @@ export 'src/theme/spacing.dart';
 export 'src/theme/gradients.dart';
 
 // ============================================================
+// AUDIO SERVICES - Sound Effects
+// ============================================================
+export 'src/audio/sound_effects_service.dart';
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+export 'src/notifications/push_notification_service.dart';
+
+// ============================================================
 // WIDGETS
 // ============================================================
 export 'src/widgets/kid_button.dart';
