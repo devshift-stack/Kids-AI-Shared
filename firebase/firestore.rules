@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================
+    // PARENTS COLLECTION
+    // ============================================
+    match /parents/{parentId} {
+      // Nur der Parent selbst kann lesen/schreiben
+      allow read, write: if request.auth != null && request.auth.uid == parentId;
+
+      // Co-Parents können auch lesen (nicht schreiben)
+      allow read: if request.auth != null &&
+        resource.data.coParents[request.auth.uid] == true;
+
+      // Children Sub-Collection
+      match /children/{childId} {
+        // Parent kann alles
+        allow read, write: if request.auth != null && request.auth.uid == parentId;
+
+        // Co-Parents können lesen
+        allow read: if request.auth != null &&
+          get(/databases/$(database)/documents/parents/$(parentId)).data.coParents[request.auth.uid] == true;
+
+        // Kinder-Apps können über parentCode verifizieren und updaten
+        allow read: if request.auth != null && resource.data.parentCode != null;
+        allow update: if request.auth != null &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['linkedDeviceIds', 'isLinked', 'lastSeen']);
+      }
+
+      // Co-Parents Sub-Collection
+      match /coParents/{coParentId} {
+        allow read, write: if request.auth != null && request.auth.uid == parentId;
+        allow read: if request.auth != null && request.auth.uid == coParentId;
+      }
+    }
+
+    // ============================================
+    // ACTIVITY LOGS
+    // ============================================
+    match /activity/{activityId} {
+      // Kinder-Apps können schreiben (mit Validierung)
+      allow create: if request.auth != null &&
+        request.resource.data.keys().hasAll(['parentId', 'childId', 'type', 'timestamp']);
+
+      // Parents können ihre Aktivitäten lesen
+      allow read: if request.auth != null &&
+        (request.auth.uid == resource.data.parentId ||
+         exists(/databases/$(database)/documents/parents/$(resource.data.parentId)/coParents/$(request.auth.uid)));
+    }
+
+    // ============================================
+    // LEADERBOARDS (optional)
+    // ============================================
+    match /leaderboards/{leaderboardId} {
+      allow read: if true;  // Öffentlich lesbar
+      allow write: if request.auth != null;  // Nur authentifizierte User
+    }
+  }
+}

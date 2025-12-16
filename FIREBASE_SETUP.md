@@ -267,4 +267,28 @@ Dies erstellt automatisch:
 
 ---
 
+---
+
+## 12. Cloud Functions für Push Notifications
+
+Die Cloud Functions für Push Notifications befinden sich im `firebase/` Ordner.
+
+### Deployment:
+```bash
+cd firebase/functions
+npm install
+cd ..
+firebase deploy --only functions
+```
+
+### Verfügbare Functions:
+- `onActivityCreated` - Notification bei Kind-Aktivität
+- `onChildUpdated` - Notification bei Geräte-Änderungen
+- `dailyReport` - Tägliche Zusammenfassung (19:00 Uhr)
+- `sendTestNotification` - Test-Endpoint
+
+Siehe `firebase/README.md` für Details.
+
+---
+
 **Bei Fragen: Issue auf GitHub erstellen oder User fragen.**
