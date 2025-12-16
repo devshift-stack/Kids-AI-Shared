@@ -3,6 +3,7 @@
 
 class TtsConfig {
   /// Unterstützte Sprachen mit ihren Stimmen
+  /// Hauptstimmen (freundlich, warm - ideal für Kinder)
   static const Map<String, TtsVoiceConfig> voices = {
     'bs-BA': TtsVoiceConfig(
       language: 'bs-BA',
@@ -45,6 +46,32 @@ class TtsConfig {
       azureVoice: 'tr-TR-EmelNeural',
       googleVoice: 'tr-TR-Standard-A',
       displayName: 'Emel (Türkisch)',
+    ),
+  };
+
+  /// Alternative Kinderstimmen (höhere Tonlage, fröhlicher)
+  /// Für jüngere Kinder (3-6 Jahre) können diese verwendet werden
+  static const Map<String, TtsVoiceConfig> childVoices = {
+    'de-DE': TtsVoiceConfig(
+      language: 'de-DE',
+      edgeVoice: 'de-DE-GiselaNeural', // Höhere, kindliche Stimme
+      azureVoice: 'de-DE-GiselaNeural',
+      googleVoice: 'de-DE-Standard-A',
+      displayName: 'Gisela (Deutsch Kind)',
+    ),
+    'en-US': TtsVoiceConfig(
+      language: 'en-US',
+      edgeVoice: 'en-US-AnaNeural', // Kinderstimme
+      azureVoice: 'en-US-AnaNeural',
+      googleVoice: 'en-US-Standard-C',
+      displayName: 'Ana (Englisch Kind)',
+    ),
+    'tr-TR': TtsVoiceConfig(
+      language: 'tr-TR',
+      edgeVoice: 'tr-TR-AhmetNeural', // Männlich aber jugendlich
+      azureVoice: 'tr-TR-AhmetNeural',
+      googleVoice: 'tr-TR-Standard-A',
+      displayName: 'Ahmet (Türkisch)',
     ),
   };
 
@@ -105,7 +132,65 @@ class TtsConfig {
       'Hello friend!',
       'Goodbye!',
     ],
+    'hr-HR': [
+      'Bravo!',
+      'Super!',
+      'Odlično!',
+      'Točno!',
+      'Fantastično!',
+      'Pokušaj opet!',
+      'Skoro!',
+      'Ne brini, probaj ponovno!',
+      'Ti to možeš!',
+      'Samo nastavi!',
+      'Bok prijatelju!',
+      'Doviđenja!',
+    ],
+    'sr-RS': [
+      'Браво!',
+      'Супер!',
+      'Одлично!',
+      'Тако је!',
+      'Фантастично!',
+      'Покушај поново!',
+      'Скоро!',
+      'Не брини, пробај опет!',
+      'Ти то можеш!',
+      'Само настави!',
+      'Здраво другару!',
+      'Довиђења!',
+    ],
+    'tr-TR': [
+      'Aferin!',
+      'Harika!',
+      'Mükemmel!',
+      'Doğru!',
+      'Süper!',
+      'Tekrar dene!',
+      'Neredeyse!',
+      'Yapabilirsin!',
+      'Devam et!',
+      'Merhaba arkadaş!',
+      'Hoşça kal!',
+      'Çok güzel!',
+    ],
   };
+
+  /// Hilfs-Methode: Gibt die beste Stimme für ein Kind zurück
+  /// Für Kinder unter 6 Jahren wird eine Kinderstimme bevorzugt (wenn verfügbar)
+  static TtsVoiceConfig getVoiceForChild(String language, int age) {
+    if (age <= 6 && childVoices.containsKey(language)) {
+      return childVoices[language]!;
+    }
+    return voices[language] ?? voices['en-US']!;
+  }
+
+  /// Alle verfügbaren Sprachen
+  static List<String> get supportedLanguages => voices.keys.toList();
+
+  /// Prüft ob eine Sprache unterstützt wird
+  static bool isLanguageSupported(String language) =>
+      voices.containsKey(language);
 }
 
 /// Konfiguration für eine einzelne Stimme
