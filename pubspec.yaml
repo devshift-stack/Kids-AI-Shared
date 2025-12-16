@@ -12,6 +12,7 @@ dependencies:
   flutter_riverpod: ^2.4.9
   equatable: ^2.0.5
   dio: ^5.4.0
+  google_fonts: ^6.1.0
 
 flutter:
   uses-material-design: true
