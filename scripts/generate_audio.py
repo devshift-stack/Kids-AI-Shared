@@ -82,7 +82,7 @@ PHRASES = {
 
 # TTS Einstellungen
 RATE = '-10%'   # Etwas langsamer für Kinder
-PITCH = '+5%'   # Etwas höher = freundlicher
+# Pitch wird nicht verwendet (edge-tts unterstützt es nicht direkt)
 
 
 async def generate_audio(text: str, voice: str, output_path: str) -> bool:
@@ -91,8 +91,7 @@ async def generate_audio(text: str, voice: str, output_path: str) -> bool:
         communicate = edge_tts.Communicate(
             text,
             voice,
-            rate=RATE,
-            pitch=PITCH
+            rate=RATE
         )
         await communicate.save(output_path)
         return True
