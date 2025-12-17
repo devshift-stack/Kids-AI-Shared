@@ -82,7 +82,7 @@ void main() {
         final voice = TtsConfig.getVoiceForChild('fr-FR', 10);
 
         expect(voice.language, equals('en-US'));
-        expect(voice.displayName.contains('English'), isTrue);
+        expect(voice.displayName.contains('Jenny'), isTrue); // Jenny (Englisch)
       });
 
       test('handled age = 0', () {
