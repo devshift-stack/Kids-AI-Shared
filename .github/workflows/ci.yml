@@ -1,0 +1,114 @@
+name: CI Pipeline (Package)
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  FLUTTER_VERSION: '3.32.0'
+
+jobs:
+  # ============================================================
+  # ANALYZE - Code-Qualität prüfen
+  # ============================================================
+  analyze:
+    name: 🔍 Analyze
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: 📦 Get dependencies
+        run: flutter pub get
+
+      - name: 🔍 Analyze code
+        run: flutter analyze --no-fatal-infos
+
+      - name: 📋 Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+  # ============================================================
+  # TEST - Unit Tests ausführen
+  # ============================================================
+  test:
+    name: 🧪 Test
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: 📦 Get dependencies
+        run: flutter pub get
+
+      - name: 🧪 Run tests
+        run: flutter test --coverage
+
+      - name: 📊 Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage/lcov.info
+          fail_ci_if_error: false
+
+  # ============================================================
+  # DRY RUN - Prüfen ob Package publishable ist
+  # ============================================================
+  publish-dry-run:
+    name: 📦 Publish Dry Run
+    runs-on: ubuntu-latest
+    needs: [analyze, test]
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: 📦 Get dependencies
+        run: flutter pub get
+
+      - name: 🔍 Publish dry run
+        run: dart pub publish --dry-run
+
+  # ============================================================
+  # COMPATIBILITY - Testen ob Apps das Package nutzen können
+  # ============================================================
+  compatibility:
+    name: 🔗 Compatibility Check
+    runs-on: ubuntu-latest
+    needs: [analyze, test]
+    strategy:
+      matrix:
+        flutter-version: ['3.32.0', '3.29.0']
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🎯 Setup Flutter ${{ matrix.flutter-version }}
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          cache: true
+
+      - name: 📦 Get dependencies
+        run: flutter pub get
+
+      - name: 🔍 Analyze
+        run: flutter analyze --no-fatal-infos
