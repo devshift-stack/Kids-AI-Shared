@@ -462,3 +462,190 @@ class KidsReminders {
     );
   }
 }
+
+// ============================================================
+// LIANKO-SPEZIFISCHE BENACHRICHTIGUNGEN
+// ============================================================
+
+/// Lianko-spezifische Benachrichtigungen (Hörtraining)
+class LiankoNotifications {
+  LiankoNotifications._();
+
+  /// Hörgeräte-Erinnerung
+  static Future<void> showHearingAidReminder() async {
+    await PushNotificationService.instance.showNotification(
+      title: '🦻 Hörgeräte-Check',
+      body: 'Trägst du deine Hörgeräte? Zeit für Hörtraining!',
+      type: NotificationType.reminder,
+    );
+  }
+
+  /// Batterie-Wechsel Erinnerung
+  static Future<void> showBatteryReminder({int daysOverdue = 0}) async {
+    final message = daysOverdue > 0
+        ? 'Die Batterien sollten vor $daysOverdue Tagen gewechselt werden!'
+        : 'Zeit für frische Batterien! 🔋';
+
+    await PushNotificationService.instance.showNotification(
+      title: '🔋 Batterie-Erinnerung',
+      body: message,
+      type: NotificationType.reminder,
+    );
+  }
+
+  /// Logopädie-Übung verfügbar
+  static Future<void> showTherapyExercise({
+    required String therapistName,
+    int exerciseCount = 1,
+  }) async {
+    await PushNotificationService.instance.showNotification(
+      title: '🗣️ Neue Übungen von $therapistName',
+      body: '$exerciseCount neue Übung${exerciseCount > 1 ? 'en' : ''} warten auf dich!',
+      type: NotificationType.newContent,
+    );
+  }
+
+  /// Hörtraining-Fortschritt für Eltern
+  static Future<void> notifyParentProgress({
+    required String childName,
+    required int sessionsToday,
+    required int minutesToday,
+    double? hearingAidWearRate,
+  }) async {
+    String body = '$childName hat heute $sessionsToday Übungen gemacht ($minutesToday Min).';
+    if (hearingAidWearRate != null) {
+      body += ' Hörgeräte: ${(hearingAidWearRate * 100).round()}%';
+    }
+
+    await PushNotificationService.instance.showNotification(
+      title: '📊 Tagesbericht: $childName',
+      body: body,
+      type: NotificationType.parentMessage,
+    );
+  }
+
+  /// Kind trägt keine Hörgeräte
+  static Future<void> notifyParentNoHearingAid({
+    required String childName,
+    String? activity,
+  }) async {
+    await PushNotificationService.instance.showNotification(
+      title: '🦻 Hörgeräte-Hinweis',
+      body: activity != null
+          ? '$childName wollte $activity starten ohne Hörgeräte.'
+          : '$childName trägt gerade keine Hörgeräte.',
+      type: NotificationType.parentMessage,
+    );
+  }
+
+  /// Lern-Schwierigkeit erkannt
+  static Future<void> notifyParentDifficulty({
+    required String childName,
+    required List<String> difficultWords,
+  }) async {
+    final words = difficultWords.take(3).join(', ');
+    await PushNotificationService.instance.showNotification(
+      title: '📚 Übungsbedarf erkannt',
+      body: '$childName hatte Schwierigkeiten bei: $words',
+      type: NotificationType.parentMessage,
+    );
+  }
+
+  /// Plant tägliche Batterie-Erinnerung
+  static Future<void> scheduleBatteryReminder({
+    required int hour,
+    required int minute,
+    required int intervalDays,
+  }) async {
+    final now = DateTime.now();
+    var scheduledTime = DateTime(now.year, now.month, now.day, hour, minute);
+
+    if (scheduledTime.isBefore(now)) {
+      scheduledTime = scheduledTime.add(Duration(days: intervalDays));
+    }
+
+    await PushNotificationService.instance.scheduleNotification(
+      title: '🔋 Batterie-Check',
+      body: 'Hast du neue Batterien für die Hörgeräte?',
+      scheduledTime: scheduledTime,
+      type: NotificationType.reminder,
+    );
+  }
+}
+
+// ============================================================
+// ALANKO-SPEZIFISCHE BENACHRICHTIGUNGEN
+// ============================================================
+
+/// Alanko-spezifische Benachrichtigungen (Sprachentwicklung)
+class AlankoNotifications {
+  AlankoNotifications._();
+
+  /// Tägliche Lern-Erinnerung
+  static Future<void> showLearningReminder() async {
+    await PushNotificationService.instance.showNotification(
+      title: '🎮 Zeit zum Spielen!',
+      body: 'Alanko wartet auf dich! Lass uns gemeinsam lernen!',
+      type: NotificationType.reminder,
+    );
+  }
+
+  /// YouTube-Belohnung freigeschaltet
+  static Future<void> showYouTubeRewardUnlocked({
+    required int minutesEarned,
+  }) async {
+    await PushNotificationService.instance.showNotification(
+      title: '🎬 Video-Zeit freigeschaltet!',
+      body: 'Super! Du hast $minutesEarned Minuten Video verdient!',
+      type: NotificationType.reward,
+    );
+  }
+
+  /// Neues Spiel verfügbar
+  static Future<void> showNewGameAvailable({
+    required String gameName,
+  }) async {
+    await PushNotificationService.instance.showNotification(
+      title: '🎮 Neues Spiel!',
+      body: '$gameName ist jetzt für dich freigeschaltet!',
+      type: NotificationType.newContent,
+    );
+  }
+
+  /// Achievement freigeschaltet
+  static Future<void> showAchievement({
+    required String achievementName,
+    String? description,
+  }) async {
+    await PushNotificationService.instance.showNotification(
+      title: '🏆 Auszeichnung erhalten!',
+      body: description ?? 'Du hast "$achievementName" freigeschaltet!',
+      type: NotificationType.reward,
+    );
+  }
+
+  /// Fortschritt für Eltern
+  static Future<void> notifyParentProgress({
+    required String childName,
+    required int wordsLearned,
+    required int gamesPlayed,
+  }) async {
+    await PushNotificationService.instance.showNotification(
+      title: '📊 Tagesbericht: $childName',
+      body: '$childName hat heute $wordsLearned Wörter gelernt und $gamesPlayed Spiele gespielt!',
+      type: NotificationType.parentMessage,
+    );
+  }
+
+  /// Bildschirmzeit-Limit erreicht
+  static Future<void> notifyScreenTimeLimit({
+    required int minutesUsed,
+    required int minutesLimit,
+  }) async {
+    await PushNotificationService.instance.showNotification(
+      title: '⏰ Bildschirmzeit',
+      body: 'Du hast heute schon $minutesUsed von $minutesLimit Minuten genutzt.',
+      type: NotificationType.system,
+    );
+  }
+}
